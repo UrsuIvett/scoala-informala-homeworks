@@ -6,6 +6,7 @@ import ro.sci.carrental.repository.CarRepositoryImpl;
  * Created by Ivett on 20-May-17.
  */
 public class Car {
+
     private String make;
     private String model;
     private FuelType fuelType;
