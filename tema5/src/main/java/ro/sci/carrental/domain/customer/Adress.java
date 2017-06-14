@@ -1,19 +1,16 @@
-package ro.sci.carrental.domain;
+package main.java.ro.sci.carrental.domain.customer;
 
 /**
  * Created by Ivett on 28-May-17.
  */
 public class Adress {
     private String country;
+    private String county;
     private String city;
     private String street;
     private int number;
 
-    public Adress(String country, String city, String street, int number) {
-    this.country= country;
-    this.city=city;
-    this.street=street;
-    this.number=number;
+    public Adress() {
     }
 
     public String getCountry() {
@@ -22,6 +19,14 @@ public class Adress {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
     }
 
     public String getCity() {

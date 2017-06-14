@@ -1,7 +1,7 @@
-package ro.sci.carrental.service;
+package main.java.ro.sci.carrental.service;
 
-import ro.sci.carrental.domain.Car;
-import ro.sci.carrental.repository.CarRepositoryImpl;
+import main.java.ro.sci.carrental.repository.CarRepositoryImpl;
+import main.java.ro.sci.carrental.domain.car.Car;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package ro.sci.carrental.service;
+package main.java.ro.sci.carrental.service;
 
-import ro.sci.carrental.domain.Customer;
+import main.java.ro.sci.carrental.domain.customer.Customer;
 
 import java.util.List;
 

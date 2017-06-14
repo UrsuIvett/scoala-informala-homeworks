@@ -1,6 +1,4 @@
-package ro.sci.carrental.domain;
-
-import ro.sci.carrental.repository.CarRepositoryImpl;
+package main.java.ro.sci.carrental.domain.car;
 
 /**
  * Created by Ivett on 20-May-17.
@@ -20,26 +18,11 @@ public class Car {
     private boolean gps;
     private boolean available;
     private boolean working;
-    private double pricePerDay;  /* in euro/
 /*
  Car constructor
  */
 
-    public Car(String make, String model, FuelType fuelType, float size, String color, String category, int nrSeats, int nrDoors, GearBoxType gearBoxType, boolean airCondition, boolean gps, boolean available, boolean working, double pricePerDay) {
-        this.make = make;
-        this.model = model;
-        this.fuelType = fuelType;
-        this.size = size;
-        this.color = color;
-        this.category = category;
-        this.nrSeats = nrSeats;
-        this.nrDoors = nrDoors;
-        this.gearBoxType = gearBoxType;
-        this.airCondition = airCondition;
-        this.gps = gps;
-        this.available = available;
-        this.working = working;
-        this.pricePerDay = pricePerDay;
+    public Car() {
     }
 
     /*
@@ -186,12 +169,6 @@ public class Car {
          Gets the price per day of the current car
          @returns price per day of the current car
          */
-    public double getPricePerDay(CarRepositoryImpl carRepository) {
-        return pricePerDay;
-    }
 
-    public void setPricePerDay(double pricePerDay) {
-        this.pricePerDay = pricePerDay;
-    }
 }
 

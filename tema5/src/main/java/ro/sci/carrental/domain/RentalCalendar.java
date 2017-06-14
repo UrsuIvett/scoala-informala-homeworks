@@ -1,4 +1,4 @@
-package ro.sci.carrental.domain;
+package main.java.ro.sci.carrental.domain;
 
 import java.text.DateFormat;
 

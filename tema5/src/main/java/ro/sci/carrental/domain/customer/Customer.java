@@ -1,4 +1,4 @@
-package ro.sci.carrental.domain;
+package main.java.ro.sci.carrental.domain.customer;
 
 /**
  * Created by Ivett on 28-May-17.
@@ -9,11 +9,7 @@ public class Customer {
     private Adress adress;
     private String mobilNumber;
 
-    public Customer(String firstName, String lastName, Adress adress, String mobilNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.adress = adress;
-        this.mobilNumber = mobilNumber;
+    public Customer() {
     }
 
     public String getFirstName() {
