@@ -4,6 +4,7 @@ import main.java.ro.sci.carrental.domain.car.Car;
 import main.java.ro.sci.carrental.domain.car.FuelType;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -12,7 +13,9 @@ import java.util.List;
 public class CarRepositoryImpl implements CarRepository {
     private CarRepository carRepository;
 
-    public List<Car> cars = new ArrayList<Car>();
+    private List<Car> cars = new ArrayList<Car>();
+
+    public CarRepositoryImpl(List<Car> cars) { this.cars=cars; }
 
     public List<Car> getAll() { return null; }
 
@@ -26,6 +29,15 @@ public class CarRepositoryImpl implements CarRepository {
     }
 
     public void delete (Car car) {
+
+        Iterator<Car> iterator = cars.iterator();
+        while (iterator.hasNext()) {
+            Car currentCar = iterator.next();
+            if (currentCar.equals(car)) {
+                iterator.remove();
+            }
+        }
+
 
     }
 

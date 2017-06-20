@@ -18,6 +18,7 @@ public class Car {
     private boolean gps;
     private boolean available;
     private boolean working;
+    private String  number;
 /*
  Car constructor
  */
@@ -165,10 +166,30 @@ public class Car {
         this.working = working;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     /*
-         Gets the price per day of the current car
-         @returns price per day of the current car
+
+         equals method
          */
 
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Car car = (Car) o;
+
+        if (make != car.make) return false;
+        if (model != null ? !model.equals(car.model): car.model != null ) return false;
+
+        return number != null ? number.equals(car.number) : car.number ==  null ;
+    }
 }
 

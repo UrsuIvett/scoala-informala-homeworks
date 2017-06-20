@@ -4,6 +4,7 @@ import main.java.ro.sci.carrental.repository.CarRepositoryImpl;
 import main.java.ro.sci.carrental.domain.car.Car;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -50,6 +51,9 @@ public class CarServiceImpl implements CarService {
         }
         return foundCars;
     }
+
+
+
 
 
 }

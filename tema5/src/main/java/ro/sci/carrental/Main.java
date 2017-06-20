@@ -4,6 +4,7 @@ import main.java.ro.sci.carrental.domain.car.Car;
 import main.java.ro.sci.carrental.domain.car.FuelType;
 import main.java.ro.sci.carrental.domain.car.GearBoxType;
 import main.java.ro.sci.carrental.domain.customer.Customer;
+import main.java.ro.sci.carrental.repository.CarRepositoryImpl;
 import main.java.ro.sci.carrental.service.CarServiceImpl;
 import main.java.ro.sci.carrental.domain.customer.Adress;
 
@@ -33,6 +34,7 @@ public class Main {
         Ford.setGps(true);
         Ford.setAvailable(true);
         Ford.setWorking(true);
+        Ford.setNumber("B-HFT-18");
 
         Car VW = new Car();
         VW.setMake("Volkswagen");
@@ -48,6 +50,7 @@ public class Main {
         VW.setGps(false);
         VW.setAvailable(true);
         VW.setWorking(true);
+        VW.setNumber("B-TFL-20");
 
         Car Skoda1 = new Car();
         Skoda1.setMake("Skoda");
@@ -63,6 +66,7 @@ public class Main {
         Skoda1.setGps(false);
         Skoda1.setAvailable(true);
         Skoda1.setWorking(true);
+        Skoda1.setNumber("MS-TFL-01");
 
         Car Skoda2 = new Car();
         Skoda2.setMake("Skoda");
@@ -78,11 +82,29 @@ public class Main {
         Skoda2.setGps(true);
         Skoda2.setAvailable(true);
         Skoda2.setWorking(true);
+        Skoda2.setNumber("MZ-ZZZ-10");
+
+        Car Skoda3 = new Car();
+        Skoda3.setMake("Skoda");
+        Skoda3.setModel("Superb");
+        Skoda3.setFuelType(FuelType.DIESEL);
+        Skoda3.setSize(1700);
+        Skoda3.setColor("Green");
+        Skoda3.setCategory("Monovolum");
+        Skoda3.setNrSeats(7);
+        Skoda3.setNrDoors(5);
+        Skoda3.setGearBoxType(GearBoxType.MANUAL);
+        Skoda3.setAirCondition(true);
+        Skoda3.setGps(true);
+        Skoda3.setAvailable(true);
+        Skoda3.setWorking(true);
+        Skoda3.setNumber("MZ-ZZZ-10");
 
         carList.add(Ford);
         carList.add(VW);
         carList.add(Skoda1);
         carList.add(Skoda2);
+        carList.add(Skoda3);
 
         List<Customer> customers = new ArrayList<Customer>();
 
@@ -131,7 +153,18 @@ public class Main {
 
         System.out.println(" ");
 
+
         searching(carList);
+
+        CarRepositoryImpl newList = new CarRepositoryImpl(carList);
+        newList.delete(Skoda3);
+        System.out.println(" ");
+        System.out.println("After deleting skoda3");
+
+
+        for (Car car : carList) {
+            System.out.println(car.getMake()+ " " + car.getModel());
+        }
     }
 
     private static void searching(List<Car> carList) {
@@ -171,10 +204,13 @@ public class Main {
             System.out.println(car.getMake() + " " + car.getModel() + " " + car.getColor());
         }
 
-
-
-
     }
+
+
+
+
+
+
 }
 
 
