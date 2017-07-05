@@ -5,6 +5,7 @@ import java.text.DateFormat;
 /**
  * Created by Ivett on 20-May-17.
  */
+
 public class RentalCalendar {
 /* pickUpTime represents the start of the rental period, returnTime represents the end of the rental period
     the number of days

@@ -3,14 +3,14 @@ package main.java.ro.sci.carrental.domain.customer;
 /**
  * Created by Ivett on 28-May-17.
  */
-public class Adress {
+public class Address {
     private String country;
     private String county;
     private String city;
     private String street;
     private int number;
 
-    public Adress() {
+    public Address() {
     }
 
     public String getCountry() {

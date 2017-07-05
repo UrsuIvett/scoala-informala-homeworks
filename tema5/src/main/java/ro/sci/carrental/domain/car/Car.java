@@ -1,5 +1,7 @@
 package main.java.ro.sci.carrental.domain.car;
 
+import main.java.ro.sci.carrental.service.Price;
+
 /**
  * Created by Ivett on 20-May-17.
  */
@@ -19,6 +21,7 @@ public class Car {
     private boolean available;
     private boolean working;
     private String  number;
+    private Price pricePerDay;
 /*
  Car constructor
  */
@@ -174,10 +177,22 @@ public class Car {
         this.number = number;
     }
 
+    public Price getPricePerDay() {
+        return pricePerDay;
+    }
+
+    public void setPricePerDay(Price pricePerDay) {
+        this.pricePerDay = pricePerDay;
+    }
+
     /*
 
          equals method
          */
+/** two objects of Car type are equal if their number is equal (if their make or model is equal it doesn't mean that
+ * they are equal)
+ */
+
 
     @Override
     public boolean equals(Object o){
