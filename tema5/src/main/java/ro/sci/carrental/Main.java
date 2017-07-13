@@ -29,8 +29,7 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger("Car");
 
     public static void main(String[] args) throws InvalidDaysNumberException {
-                LOGGER.info("Start Main");
-
+        LOGGER.info("START Main");
         List<Car> carList = new ArrayList<Car>();
 
         Car Ford = new Car();
@@ -69,8 +68,6 @@ public class Main {
         Price price2 = new Price(3.50, USD);
         VW.setPricePerDay(price2);
 
-
-
         Car Skoda1 = new Car();
         Skoda1.setMake("Skoda");
         Skoda1.setModel("Octavia");
@@ -89,8 +86,6 @@ public class Main {
         Price price3 = new Price(3.00, EURO);
         Skoda1.setPricePerDay(price3);
 
-
-
         Car Skoda2 = new Car();
         Skoda2.setMake("Skoda");
         Skoda2.setModel("Superb");
@@ -108,8 +103,6 @@ public class Main {
         Skoda2.setNumber("MZ-ZZZ-10");
         Price price4 = new Price(10.50, RON);
         Skoda2.setPricePerDay(price4);
-
-
 
         Car Skoda3 = new Car();
         Skoda3.setMake("Skoda");
@@ -175,31 +168,26 @@ public class Main {
         customers.add(customer3);
 
         System.out.println("Our customers: ");
-
         for (Customer c : customers) {
             System.out.println(c.getFirstName()+ " " + c.getLastName() + ", " + "mobile number:" + c.getMobilNumber());
         }
         System.out.println(" ");
-
         searching(carList);
 
         CarRepositoryImpl newList = new CarRepositoryImpl(carList);
         newList.delete(Skoda3);
         System.out.println(" ");
         System.out.println("After deleting Skoda Superb ");
-
         for (Car car : carList) {
             System.out.println(car.getMake()+ " " + car.getModel());
         }
-
         System.out.println(" ");
 
         RentingPrice rentingPrice = new RentingPrice();
         int daysNumber = 5;
-
         Price totalPrice= rentingPrice.calculateRentingPrince(Ford,daysNumber);
         System.out.println(Ford.getMake()+Ford.getModel()+" The renting price for " +daysNumber + " days is: " + totalPrice.getPrice() +" "+totalPrice.getCurrency());
-
+        LOGGER.info("END Main");
     }
 
     private static void searching(List<Car> carList) {
