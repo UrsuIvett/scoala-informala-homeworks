@@ -179,9 +179,7 @@ public class Main {
         for (Customer c : customers) {
             System.out.println(c.getFirstName()+ " " + c.getLastName() + ", " + "mobile number:" + c.getMobilNumber());
         }
-
         System.out.println(" ");
-
 
         searching(carList);
 
@@ -189,7 +187,6 @@ public class Main {
         newList.delete(Skoda3);
         System.out.println(" ");
         System.out.println("After deleting Skoda Superb ");
-
 
         for (Car car : carList) {
             System.out.println(car.getMake()+ " " + car.getModel());
@@ -243,12 +240,7 @@ public class Main {
         }
 
     }
-
-
     }
-
-
-
 
 
 
