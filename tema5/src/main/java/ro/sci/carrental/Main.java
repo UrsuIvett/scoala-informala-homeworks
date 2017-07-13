@@ -1,24 +1,35 @@
-package main.java.ro.sci.carrental;
+package ro.sci.carrental;
 
-import main.java.ro.sci.carrental.domain.car.Car;
-import main.java.ro.sci.carrental.domain.car.FuelType;
-import main.java.ro.sci.carrental.domain.car.GearBoxType;
-import main.java.ro.sci.carrental.domain.customer.Customer;
-import main.java.ro.sci.carrental.repository.CarRepositoryImpl;
-import main.java.ro.sci.carrental.service.CarServiceImpl;
-import main.java.ro.sci.carrental.domain.customer.Address;
-import main.java.ro.sci.carrental.service.Price;
-import main.java.ro.sci.carrental.service.RentingPrice;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ro.sci.carrental.domain.car.Car;
+import ro.sci.carrental.domain.car.Category;
+import ro.sci.carrental.domain.car.FuelType;
+import ro.sci.carrental.domain.car.GearBoxType;
+import ro.sci.carrental.domain.customer.Address;
+import ro.sci.carrental.domain.customer.Customer;
+import ro.sci.carrental.repository.CarRepositoryImpl;
+import ro.sci.carrental.service.CarServiceImpl;
+import ro.sci.carrental.service.InvalidDaysNumberException;
+import ro.sci.carrental.service.Price;
+import ro.sci.carrental.service.RentingPrice;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static ro.sci.carrental.service.Currency.*;
+
 
 /**
  * Created by Ivett on 24-May-17.
  */
 public class Main {
 
-    public static void main(String[] args) {
+    private static final Logger LOGGER = LoggerFactory.getLogger("Car");
+
+    public static void main(String[] args) throws InvalidDaysNumberException {
+                LOGGER.info("Start Main");
 
         List<Car> carList = new ArrayList<Car>();
 
@@ -28,7 +39,7 @@ public class Main {
         Ford.setFuelType(FuelType.DIESEL);
         Ford.setSize(1600);
         Ford.setColor("Black");
-        Ford.setCategory("Break");
+        Ford.setCategory(Category.BREAK);
         Ford.setNrSeats(5);
         Ford.setNrDoors(5);
         Ford.setGearBoxType(GearBoxType.MANUAL);
@@ -37,7 +48,7 @@ public class Main {
         Ford.setAvailable(true);
         Ford.setWorking(true);
         Ford.setNumber("B-HFT-18");
-        Price price1 = new Price(4.5, "EURO");
+        Price price1 = new Price(4.5, EURO);
         Ford.setPricePerDay(price1);
 
         Car VW = new Car();
@@ -46,7 +57,7 @@ public class Main {
         VW.setFuelType(FuelType.PETROL);
         VW.setSize(1400);
         VW.setColor("Silver");
-        VW.setCategory("Hatchback");
+        VW.setCategory(Category.HATCHBACK);
         VW.setNrSeats(4);
         VW.setNrDoors(5);
         VW.setGearBoxType(GearBoxType.MANUAL);
@@ -55,7 +66,7 @@ public class Main {
         VW.setAvailable(true);
         VW.setWorking(true);
         VW.setNumber("B-TFL-20");
-        Price price2 = new Price(3.50, "EURO");
+        Price price2 = new Price(3.50, USD);
         VW.setPricePerDay(price2);
 
 
@@ -66,7 +77,7 @@ public class Main {
         Skoda1.setFuelType(FuelType.DIESEL);
         Skoda1.setSize(1900);
         Skoda1.setColor("Green");
-        Skoda1.setCategory("Sedan");
+        Skoda1.setCategory(Category.SEDAN);
         Skoda1.setNrSeats(5);
         Skoda1.setNrDoors(4);
         Skoda1.setGearBoxType(GearBoxType.AUTO);
@@ -75,7 +86,7 @@ public class Main {
         Skoda1.setAvailable(true);
         Skoda1.setWorking(true);
         Skoda1.setNumber("MS-TFL-01");
-        Price price3 = new Price(3.00, "EURO");
+        Price price3 = new Price(3.00, EURO);
         Skoda1.setPricePerDay(price3);
 
 
@@ -86,7 +97,7 @@ public class Main {
         Skoda2.setFuelType(FuelType.DIESEL);
         Skoda2.setSize(1700);
         Skoda2.setColor("Green");
-        Skoda2.setCategory("Monovolum");
+        Skoda2.setCategory(Category.MONOVOLUME);
         Skoda2.setNrSeats(7);
         Skoda2.setNrDoors(5);
         Skoda2.setGearBoxType(GearBoxType.MANUAL);
@@ -95,7 +106,7 @@ public class Main {
         Skoda2.setAvailable(true);
         Skoda2.setWorking(true);
         Skoda2.setNumber("MZ-ZZZ-10");
-        Price price4 = new Price(2.50,"EURO");
+        Price price4 = new Price(10.50, RON);
         Skoda2.setPricePerDay(price4);
 
 
@@ -106,7 +117,7 @@ public class Main {
         Skoda3.setFuelType(FuelType.DIESEL);
         Skoda3.setSize(1700);
         Skoda3.setColor("Green");
-        Skoda3.setCategory("Monovolum");
+        Skoda3.setCategory(Category.MONOVOLUME);
         Skoda3.setNrSeats(7);
         Skoda3.setNrDoors(5);
         Skoda3.setGearBoxType(GearBoxType.MANUAL);
@@ -115,7 +126,7 @@ public class Main {
         Skoda3.setAvailable(true);
         Skoda3.setWorking(true);
         Skoda3.setNumber("MZ-ZZZ-10");
-        Price price5 = new Price(2.50, "EURO");
+        Price price5 = new Price(10.50, RON);
         Skoda3.setPricePerDay(price5);
 
         carList.add(Ford);
@@ -234,10 +245,10 @@ public class Main {
     }
 
 
+    }
 
 
 
 
-}
 
 

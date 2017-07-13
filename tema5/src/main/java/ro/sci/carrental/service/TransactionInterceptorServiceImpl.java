@@ -1,4 +1,4 @@
-package main.java.ro.sci.carrental.service;
+package ro.sci.carrental.service;
 
 /**
  * Created by Ivett on 13-Jun-17.

@@ -1,4 +1,4 @@
-package main.java.ro.sci.carrental.service;
+package ro.sci.carrental.service;
 
 /**
  * Created by Ivett on 13-Jun-17.
@@ -10,12 +10,15 @@ package main.java.ro.sci.carrental.service;
  */
 
 public class Price {
-    private double price;
-    private String currency;
 
-    public Price(double price, String currency) {
+
+    private double price;
+    private Currency currency;
+
+    public Price(double price, Currency currency) {
         this.price = price;
         this.currency = currency;
+
     }
 
 
@@ -26,6 +29,16 @@ public class Price {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -48,13 +61,6 @@ public class Price {
         return result;
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
 
 
 }

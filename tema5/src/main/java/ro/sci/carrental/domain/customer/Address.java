@@ -1,4 +1,4 @@
-package main.java.ro.sci.carrental.domain.customer;
+package ro.sci.carrental.domain.customer;
 
 /**
  * Created by Ivett on 28-May-17.

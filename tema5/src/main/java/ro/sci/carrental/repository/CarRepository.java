@@ -1,7 +1,9 @@
-package main.java.ro.sci.carrental.repository;
+package ro.sci.carrental.repository;
 
-import main.java.ro.sci.carrental.domain.car.FuelType;
-import main.java.ro.sci.carrental.domain.car.Car;
+
+
+import ro.sci.carrental.domain.car.Car;
+import ro.sci.carrental.domain.car.FuelType;
 
 import java.util.List;
 

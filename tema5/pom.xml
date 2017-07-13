@@ -8,5 +8,14 @@
     <artifactId>tema3</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+
+
+    </dependencies>
 </project>

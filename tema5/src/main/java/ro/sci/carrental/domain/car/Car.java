@@ -1,6 +1,6 @@
-package main.java.ro.sci.carrental.domain.car;
+package ro.sci.carrental.domain.car;
 
-import main.java.ro.sci.carrental.service.Price;
+import ro.sci.carrental.service.Price;
 
 /**
  * Created by Ivett on 20-May-17.
@@ -12,7 +12,7 @@ public class Car {
     private FuelType fuelType;
     private float size;
     private String color;
-    private String category;
+    private Category category;
     private int nrSeats;
     private int nrDoors;
     private GearBoxType gearBoxType;
@@ -89,11 +89,11 @@ public class Car {
         Gets the category of the car, for ex. hatchback, sport, break, etc.
         @returns String representing the category of the current car
         */
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -205,6 +205,27 @@ public class Car {
         if (model != null ? !model.equals(car.model): car.model != null ) return false;
 
         return number != null ? number.equals(car.number) : car.number ==  null ;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", fuelType=" + fuelType +
+                ", size=" + size +
+                ", color='" + color + '\'' +
+                ", category=" + category +
+                ", nrSeats=" + nrSeats +
+                ", nrDoors=" + nrDoors +
+                ", gearBoxType=" + gearBoxType +
+                ", airCondition=" + airCondition +
+                ", gps=" + gps +
+                ", available=" + available +
+                ", working=" + working +
+                ", number='" + number + '\'' +
+                ", pricePerDay=" + pricePerDay +
+                '}';
     }
 }
 

@@ -1,6 +1,6 @@
-package main.java.ro.sci.carrental.service;
+package ro.sci.carrental.service;
 
-import main.java.ro.sci.carrental.domain.car.Car;
+import ro.sci.carrental.domain.car.Car;
 
 import java.util.List;
 
