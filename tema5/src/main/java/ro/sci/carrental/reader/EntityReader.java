@@ -12,19 +12,17 @@ import java.util.List;
 /**
  * Created by Ivett on 13-Jul-17.
  */
+/*this class reads the text from a text file, and the text is transformed into a list of strings*/
 public class EntityReader {
     public List<String> readLines(File file) {
         Charset charset = Charset.forName("UTF8");
-        //try ( FileInputStream in = new FileInputStream("in.txt");
-        List<String> list= new ArrayList<>();
 
+        List<String> list= new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(file.toPath(),charset))
         {
             String line= null;
             while ((line = reader.readLine()) != null) {
                 list.add(line);
-
-
             }
         } catch (IOException e) {
             System.err.println("IOException: "+ e);

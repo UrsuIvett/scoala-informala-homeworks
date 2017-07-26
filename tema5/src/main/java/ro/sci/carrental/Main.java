@@ -1,25 +1,18 @@
 package ro.sci.carrental;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ro.sci.carrental.domain.car.Car;
-import ro.sci.carrental.domain.car.Category;
-import ro.sci.carrental.domain.car.FuelType;
-import ro.sci.carrental.domain.car.GearBoxType;
 import ro.sci.carrental.domain.customer.Address;
 import ro.sci.carrental.domain.customer.Customer;
+import ro.sci.carrental.reader.*;
+import ro.sci.carrental.repository.CarRepository;
 import ro.sci.carrental.repository.CarRepositoryImpl;
-import ro.sci.carrental.service.CarServiceImpl;
-import ro.sci.carrental.service.InvalidDaysNumberException;
-import ro.sci.carrental.service.Price;
-import ro.sci.carrental.service.RentingPrice;
+import ro.sci.carrental.service.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static ro.sci.carrental.service.Currency.*;
-
 
 /**
  * Created by Ivett on 24-May-17.
@@ -28,166 +21,141 @@ public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("Car");
 
-    public static void main(String[] args) throws InvalidDaysNumberException {
+    public static void main(String[] args) throws InvalidCurrencyException {
         LOGGER.info("START Main");
-        List<Car> carList = new ArrayList<Car>();
 
-        Car Ford = new Car();
-        Ford.setMake("Ford");
-        Ford.setModel("Focus");
-        Ford.setFuelType(FuelType.DIESEL);
-        Ford.setSize(1600);
-        Ford.setColor("Black");
-        Ford.setCategory(Category.BREAK);
-        Ford.setNrSeats(5);
-        Ford.setNrDoors(5);
-        Ford.setGearBoxType(GearBoxType.MANUAL);
-        Ford.setAirCondition(true);
-        Ford.setGps(true);
-        Ford.setAvailable(true);
-        Ford.setWorking(true);
-        Ford.setNumber("B-HFT-18");
-        Price price1 = new Price(4.5, EURO);
-        Ford.setPricePerDay(price1);
-
-        Car VW = new Car();
-        VW.setMake("Volkswagen");
-        VW.setModel("Golf");
-        VW.setFuelType(FuelType.PETROL);
-        VW.setSize(1400);
-        VW.setColor("Silver");
-        VW.setCategory(Category.HATCHBACK);
-        VW.setNrSeats(4);
-        VW.setNrDoors(5);
-        VW.setGearBoxType(GearBoxType.MANUAL);
-        VW.setAirCondition(false);
-        VW.setGps(false);
-        VW.setAvailable(true);
-        VW.setWorking(true);
-        VW.setNumber("B-TFL-20");
-        Price price2 = new Price(3.50, USD);
-        VW.setPricePerDay(price2);
-
-        Car Skoda1 = new Car();
-        Skoda1.setMake("Skoda");
-        Skoda1.setModel("Octavia");
-        Skoda1.setFuelType(FuelType.DIESEL);
-        Skoda1.setSize(1900);
-        Skoda1.setColor("Green");
-        Skoda1.setCategory(Category.SEDAN);
-        Skoda1.setNrSeats(5);
-        Skoda1.setNrDoors(4);
-        Skoda1.setGearBoxType(GearBoxType.AUTO);
-        Skoda1.setAirCondition(true);
-        Skoda1.setGps(false);
-        Skoda1.setAvailable(true);
-        Skoda1.setWorking(true);
-        Skoda1.setNumber("MS-TFL-01");
-        Price price3 = new Price(3.00, EURO);
-        Skoda1.setPricePerDay(price3);
-
-        Car Skoda2 = new Car();
-        Skoda2.setMake("Skoda");
-        Skoda2.setModel("Superb");
-        Skoda2.setFuelType(FuelType.DIESEL);
-        Skoda2.setSize(1700);
-        Skoda2.setColor("Green");
-        Skoda2.setCategory(Category.MONOVOLUME);
-        Skoda2.setNrSeats(7);
-        Skoda2.setNrDoors(5);
-        Skoda2.setGearBoxType(GearBoxType.MANUAL);
-        Skoda2.setAirCondition(true);
-        Skoda2.setGps(true);
-        Skoda2.setAvailable(true);
-        Skoda2.setWorking(true);
-        Skoda2.setNumber("MZ-ZZZ-10");
-        Price price4 = new Price(10.50, RON);
-        Skoda2.setPricePerDay(price4);
-
-        Car Skoda3 = new Car();
-        Skoda3.setMake("Skoda");
-        Skoda3.setModel("Superb");
-        Skoda3.setFuelType(FuelType.DIESEL);
-        Skoda3.setSize(1700);
-        Skoda3.setColor("Green");
-        Skoda3.setCategory(Category.MONOVOLUME);
-        Skoda3.setNrSeats(7);
-        Skoda3.setNrDoors(5);
-        Skoda3.setGearBoxType(GearBoxType.MANUAL);
-        Skoda3.setAirCondition(true);
-        Skoda3.setGps(true);
-        Skoda3.setAvailable(true);
-        Skoda3.setWorking(true);
-        Skoda3.setNumber("MZ-ZZZ-10");
-        Price price5 = new Price(10.50, RON);
-        Skoda3.setPricePerDay(price5);
-
-        carList.add(Ford);
-        carList.add(VW);
-        carList.add(Skoda1);
-        carList.add(Skoda2);
-        carList.add(Skoda3);
+        /* reads from a text file, and the text is transformed to a Car object
+        * */
+        final List<Car> carList = new ArrayList<Car>();
+        File file = new File("tema5/src/main/java/cars.txt");
+        EntityReader entityReader = new EntityReader();
+        List<String> lines = entityReader.readLines(file);
+        CarConverter carConverter = new CarConverter();
+        int i = 0;
+        for (String line: lines) {
+            i++;
+            Car car = null;
+            try {
+                car = carConverter.convert(line);
+                carList.add(car);
+            } catch (InvalidEntityException e) {
+                System.out.println("Invalid car for: [" +line+ "] at the line: "+i);
+            }
+        }
 
         List<Customer> customers = new ArrayList<Customer>();
+        File file1 = new File("tema5/src/main/java/customers.txt");
+        EntityReader entityReader1 = new EntityReader();
+        List<String> lines1 = entityReader1.readLines(file1);
+        CustomerConverter customerConverter = new CustomerConverter();
+        int ii = 0;
+        for (String line1: lines1) {
+            ii++;
+            Customer customer = null;
+            try {
+                customer = customerConverter.convert(line1);
+                customers.add(customer);
+            } catch (InvalidEntityException e) {
+                System.out.println("Invalid customer for: [" +line1+ "] at the line: "+ii);
+            }
+        }
 
-        Customer customer1 = new Customer();
-        customer1.setFirstName("Captain");
-        customer1.setLastName("Hook");
-        customer1.setMobilNumber("0264-444555");
-        Address address1 = new Address();
-        address1.setCountry("Romania");
-        address1.setCounty("Cluj");
-        address1.setCity("Cluj");
-        address1.setStreet("Emil Isac");
-        address1.setNumber(15);
+        List<Address> addresses = new ArrayList<>();
+        File file2 = new File("tema5/src/main/java/address.txt");
+        EntityReader entityReader2 = new EntityReader();
+        List<String> lines2 = entityReader2.readLines(file2);
+        AddressConverter addressConverter = new AddressConverter();
+        int jj = 0;
+        for (String line2: lines2) {
+            jj++;
+            Address address = null;
+            try {
+                address = addressConverter.convert(line2);
+                addresses.add(address);
+            } catch (InvalidEntityException e) {
+                System.out.println("Invalid customer for: [" +line2+ "] at the line: "+jj);
+            }
+        }
 
-        Customer customer2 = new Customer();
-        customer2.setFirstName("Charlie");
-        customer2.setLastName("Gordon");
-        customer2.setMobilNumber("0263-444666");
-        Address address2 = new Address();
-        address2.setCountry("Romania");
-        address2.setCounty("Mures");
-        address2.setCity("Targu Mures");
-        address2.setStreet("Mihai Eminescu");
-        address2.setNumber(3);
-
-        Customer customer3 = new Customer();
-        customer3.setFirstName("Louis");
-        customer3.setLastName("Griffin");
-        customer3.setMobilNumber("0261-124666");
-        Address address3 = new Address();
-        address3.setCountry("Romania");
-        address3.setCounty("Bucuresti");
-        address3.setCity("Bucuresti");
-        address3.setStreet("Comedy");
-        address3.setNumber(10);
-
-        customers.add(customer1);
-        customers.add(customer2);
-        customers.add(customer3);
+        System.out.println("Cars: ");
+        for (Car car : carList) {
+            System.out.println(car);
+        }
 
         System.out.println("Our customers: ");
+        int ic=0;
         for (Customer c : customers) {
-            System.out.println(c.getFirstName()+ " " + c.getLastName() + ", " + "mobile number:" + c.getMobilNumber());
+            ic++;
+            int ia=0;
+            for (Address a : addresses) {
+                ia++;
+                if (ic == ia) {
+                    c.setAdress(a);
+                    System.out.println(c.getFirstName() + " " + c.getLastName() + ", " + "mobile number:" + c.getMobilNumber() + " city: " + c.getAdress().getCity() + ", street: " + c.getAdress().getStreet() + " nr." + c.getAdress().getNumber());
+                }
+            }
         }
         System.out.println(" ");
         searching(carList);
 
+        /* Car car1 = new Car();
+        car1 = carList.get(3);
         CarRepositoryImpl newList = new CarRepositoryImpl(carList);
-        newList.delete(Skoda3);
+        newList.delete(car1);
         System.out.println(" ");
         System.out.println("After deleting Skoda Superb ");
         for (Car car : carList) {
             System.out.println(car.getMake()+ " " + car.getModel());
-        }
+        }*/
         System.out.println(" ");
 
+        Car car2 = new Car();
+        car2 = carList.get(1);
         RentingPrice rentingPrice = new RentingPrice();
         int daysNumber = 5;
-        Price totalPrice= rentingPrice.calculateRentingPrince(Ford,daysNumber);
-        System.out.println(Ford.getMake()+Ford.getModel()+" The renting price for " +daysNumber + " days is: " + totalPrice.getPrice() +" "+totalPrice.getCurrency());
+        Price totalPrice= rentingPrice.calculateRentingPrince(car2,daysNumber);
+        System.out.println(car2.getMake()+car2.getModel()+" The renting price for " +daysNumber + " days is: " + totalPrice.getPrice() +" "+totalPrice.getCurrency());
         LOGGER.info("END Main");
+
+        final CarRentalDispatcher carRentalDispatcher = new CarRentalDispatcher();
+        final Car currentCar = carList.get(1);
+
+        Thread t1= new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    carRentalDispatcher.produce(carList,currentCar);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    carRentalDispatcher.consume(carList, currentCar);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Thread t3 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    carRentalDispatcher.consume(carList, currentCar);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        t1.start();
+        t2.start();
+        t3.start();
     }
 
     private static void searching(List<Car> carList) {
@@ -197,6 +165,20 @@ public class Main {
        for (Car car : carList) {
             System.out.println(car.getMake()+ " " + car.getModel()+ " renting price/day: "+car.getPricePerDay().getPrice()+" "+car.getPricePerDay().getCurrency());
         }
+
+        File file = new File("tema5/src/main/java/carsout.txt");
+        EntityWriter entityWriter = new EntityWriter();
+       try {
+           ArrayList<String > carsInString = new ArrayList<>();
+           CarToString carToString = new CarToString();
+           for (Car currentCar: carList) {
+               carsInString.add(carToString.convertToString(currentCar));
+           }
+           entityWriter.readLines(carsInString, file);
+       } catch (InvalidEntityException e){
+           System.out.println("Invalid entity");
+       }
+
 
         System.out.println(" ");
         System.out.println("Cars after search by make: ");
@@ -228,6 +210,7 @@ public class Main {
         }
 
     }
+
     }
 
 
