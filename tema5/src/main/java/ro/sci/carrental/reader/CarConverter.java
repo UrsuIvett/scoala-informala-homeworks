@@ -18,7 +18,7 @@ public class CarConverter implements Converter<Car> {
         car.setMake(tokens[0]);
         car.setModel(tokens[1]);
         car.setFuelType(FuelType.valueOf(tokens[2].toUpperCase()));
-        car.setSize(Float.valueOf(tokens[3]));
+        car.setSize(Integer.valueOf(tokens[3]));
         car.setColor(tokens[4]);
         car.setCategory(Category.valueOf(tokens[5].toUpperCase()));
         car.setNrSeats(Integer.valueOf(tokens[6]));
@@ -28,7 +28,7 @@ public class CarConverter implements Converter<Car> {
         car.setGps(Boolean.valueOf(tokens[10]));
         car.setAvailable(Boolean.valueOf(tokens[11]));
         car.setWorking(Boolean.valueOf(tokens[12]));
-        car.setNumber(tokens[13]);
+        car.setCarNumber(tokens[13]);
         Price price = new Price(Double.valueOf(tokens[14]), Currency.valueOf(tokens[15].toUpperCase()));
         car.setPricePerDay(price);
         return car;

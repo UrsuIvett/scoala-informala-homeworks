@@ -1,4 +1,4 @@
-Ford, Focus, DIESEL, 1600, Black, BREAK, 5, 5, MANUAL, true, true, true, true, B-HFT-18, 4.50, EURO
+Ford, Focus, DIESEL, 1600, Black, BREAK, 5, 5, MANUAL, true, true, true, true, B-HFT-18, 4.50, EUR
 Volkswagen, Golf, PETROL, 1400, Silver, HATCHBACK, 4, 5, MANUAL, false, false, true, true, B-TFL-20, 3.50, USD
 Skoda, Octavia, DIESEL, 1900, Green, SEDAN, 5, 4, AUTO, true, false, true, true, MS-TFL-01, 3.00, EURO
 Skoda, Superb, DIESEL, 1700, Green, MONOVOLUME, 7, 5, MANUAL, true, true, true, true, MZ-ZZZ-10, 10.50, RON

@@ -10,19 +10,18 @@ import java.util.List;
 /**
  * Created by Ivett on 24-May-17.
  */
-public class CarRepositoryImpl implements CarRepository {
-    private CarRepository carRepository;
+public class CarRepositoryImpl implements CarRepository<Car> {
 
     private List<Car> cars = new ArrayList<Car>();
 
-    public CarRepositoryImpl(List<Car> cars) { this.cars=cars; }
+   /* public CarRepositoryImpl(List<Car> cars) {
+        this.cars=cars; } */
 
-    public List<Car> getAll() { return null; }
+   public List<Car> getAll() { return null; }
 
     public List<Car> getCarsByMake(String make) { return null; }
 
     public List<Car> getCarsByFuel(FuelType fuelType) { return null; }
-
 
     public void add (Car car) {
         cars.add(car);
@@ -40,8 +39,6 @@ public class CarRepositoryImpl implements CarRepository {
 
 
     }
-
     public void update (Car car) {
-
     }
 }

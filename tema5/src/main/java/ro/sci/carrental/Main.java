@@ -6,8 +6,10 @@ import ro.sci.carrental.domain.car.Car;
 import ro.sci.carrental.domain.customer.Address;
 import ro.sci.carrental.domain.customer.Customer;
 import ro.sci.carrental.reader.*;
+import ro.sci.carrental.repository.CarDAO;
 import ro.sci.carrental.repository.CarRepository;
 import ro.sci.carrental.repository.CarRepositoryImpl;
+import ro.sci.carrental.repository.CustomerDAO;
 import ro.sci.carrental.service.*;
 
 import java.io.File;
@@ -26,7 +28,7 @@ public class Main {
 
         /* reads from a text file, and the text is transformed to a Car object
         * */
-        final List<Car> carList = new ArrayList<Car>();
+        /* final List<Car> carList = new ArrayList<Car>();
         File file = new File("tema5/src/main/java/cars.txt");
         EntityReader entityReader = new EntityReader();
         List<String> lines = entityReader.readLines(file);
@@ -77,6 +79,7 @@ public class Main {
             }
         }
 
+
         System.out.println("Cars: ");
         for (Car car : carList) {
             System.out.println(car);
@@ -96,7 +99,8 @@ public class Main {
             }
         }
         System.out.println(" ");
-        searching(carList);
+
+        searching();*/
 
         /* Car car1 = new Car();
         car1 = carList.get(3);
@@ -107,9 +111,8 @@ public class Main {
         for (Car car : carList) {
             System.out.println(car.getMake()+ " " + car.getModel());
         }*/
-        System.out.println(" ");
 
-        Car car2 = new Car();
+      /*  Car car2 = new Car();
         car2 = carList.get(1);
         RentingPrice rentingPrice = new RentingPrice();
         int daysNumber = 5;
@@ -157,8 +160,10 @@ public class Main {
         t2.start();
         t3.start();
     }
+        */
 
-    private static void searching(List<Car> carList) {
+
+   /* private static void searching(List<Car> carList) {
 
         System.out.println("Cars from the Repo: ");
 
@@ -169,7 +174,7 @@ public class Main {
         File file = new File("tema5/src/main/java/carsout.txt");
         EntityWriter entityWriter = new EntityWriter();
        try {
-           ArrayList<String > carsInString = new ArrayList<>();
+           ArrayList<String> carsInString = new ArrayList<String>();
            CarToString carToString = new CarToString();
            for (Car currentCar: carList) {
                carsInString.add(carToString.convertToString(currentCar));
@@ -183,6 +188,7 @@ public class Main {
         System.out.println(" ");
         System.out.println("Cars after search by make: ");
 
+
         CarServiceImpl searchByMake = new CarServiceImpl(carList);
         List<Car> foundCarsByMake = searchByMake.findCarsByMake("Skoda");
 
@@ -190,10 +196,10 @@ public class Main {
             System.out.println(car.getMake()+ " " + car.getModel());
         }
         System.out.println(" ");
-        System.out.println("Cars after the search by make & model: ");
+        System.out.println("Cars after the search by make & model: ");*/
 
-        CarServiceImpl searchByMakeAndModel = new CarServiceImpl(carList);
-        List<Car> foundCarsByMakeAndModel = searchByMakeAndModel.findCarsByMakeAndModel("Skoda", "Octavia");
+        // CarServiceImpl searchByMakeAndModel = new CarServiceImpl(carDAO);
+        /*List<Car> foundCarsByMakeAndModel = searchByMakeAndModel.findCarsByMakeAndModel("Skoda", "Octavia");
 
         for (Car car : foundCarsByMakeAndModel) {
             System.out.println(car.getMake() + " " + car.getModel());
@@ -207,11 +213,15 @@ public class Main {
 
         for (Car car : foundCarsByMultipleCategories) {
             System.out.println(car.getMake() + " " + car.getModel() + " " + car.getColor());
-        }
+        }*/
+        CarDAO carDAO = new CarDAO();
+        carDAO.printAllCars();
 
+        CustomerDAO customerDAO = new CustomerDAO();
+        customerDAO.printAllCustomer();
+        LOGGER.info("END Main");
     }
-
-    }
+}
 
 
 

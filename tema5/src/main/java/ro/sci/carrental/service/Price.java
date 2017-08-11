@@ -5,7 +5,7 @@ package ro.sci.carrental.service;
  */
 
 /** The Price class contains the value and the currency
- * the currency should be: EURO, USD, RON,
+ * the currency should be: EUR, USD, RON,
  * it doesn't count the exchange value
  */
 

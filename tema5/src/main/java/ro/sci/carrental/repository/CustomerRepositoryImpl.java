@@ -6,22 +6,28 @@ import ro.sci.carrental.domain.customer.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerRepositoryImpl implements CustomerRepository {
+public class CustomerRepositoryImpl implements CustomerRepository<Customer>{
 
         private List<Customer> customers = new ArrayList<Customer>();
 
-        public List<Customer> getAll() {
-            return customers; }
+    @Override
+    public List<Customer> getAll() {
+        return customers;
+    }
 
+    @Override
+    public void add(Customer customer) {
 
-        public void add (Customer customer) {
-            customers.add(customer);
+    }
 
-        }
+    @Override
+    public void delete(Customer customer) {
 
-        public void delete (Customer customer) {
+    }
 
-        }
+    @Override
+    public void update(Customer customer) {
 
+    }
 }
 
