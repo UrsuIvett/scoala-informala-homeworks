@@ -1,0 +1,7 @@
+package ro.sci.carrental.repository;
+
+/**
+ * Created by Ivett on 13-Jun-17.
+ */
+public class TransactionRepositoryImpl {
+}

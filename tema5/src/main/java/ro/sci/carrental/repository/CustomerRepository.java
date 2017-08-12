@@ -1,18 +1,17 @@
 package ro.sci.carrental.repository;
 
-import ro.sci.carrental.domain.Customer;
+import ro.sci.carrental.domain.customer.Customer;
 
 import java.util.List;
 
 /**
  * Created by Ivett on 28-May-17.
  */
-public interface CustomerRepository {
+public interface CustomerRepository<T extends Customer> extends Repository<T> {
 
-    List<Customer> getAll();
-
-    void add(Customer customer);
-
-    void delete(Customer customer);
+    List<T> getAll();
+    void add(T t);
+    void delete(T t);
+    void update(T t);
 
 }

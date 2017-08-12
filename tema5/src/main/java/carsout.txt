@@ -1,0 +1,5 @@
+Ford Focus DIESEL 1600.0 Black BREAK 5 5 MANUAL true true true true B-HFT-18 4.5 EURO 
+Volkswagen Golf PETROL 1400.0 Silver HATCHBACK 4 5 MANUAL false false true true B-TFL-20 3.5 USD 
+Skoda Octavia DIESEL 1900.0 Green SEDAN 5 4 AUTO true false true true MS-TFL-01 3.0 EURO 
+Skoda Superb DIESEL 1700.0 Green MONOVOLUME 7 5 MANUAL true true true true MZ-ZZZ-10 10.5 RON 
+Skoda Superb DIESEL 1700.0 Green MONOVOLUME 7 5 MANUAL true true true true MZ-ZZZ-10 10.5 RON 

@@ -1,6 +1,6 @@
-package ro.sci.carrental.domain;
+package ro.sci.carrental.domain.car;
 
-import ro.sci.carrental.repository.CarRepositoryImpl;
+import ro.sci.carrental.service.Price;
 
 /**
  * Created by Ivett on 20-May-17.
@@ -10,9 +10,9 @@ public class Car {
     private String make;
     private String model;
     private FuelType fuelType;
-    private float size;
+    private int size;
     private String color;
-    private String category;
+    private Category category;
     private int nrSeats;
     private int nrDoors;
     private GearBoxType gearBoxType;
@@ -20,26 +20,13 @@ public class Car {
     private boolean gps;
     private boolean available;
     private boolean working;
-    private double pricePerDay;  /* in euro/
+    private String carNumber;
+    private Price pricePerDay;
 /*
  Car constructor
  */
 
-    public Car(String make, String model, FuelType fuelType, float size, String color, String category, int nrSeats, int nrDoors, GearBoxType gearBoxType, boolean airCondition, boolean gps, boolean available, boolean working, double pricePerDay) {
-        this.make = make;
-        this.model = model;
-        this.fuelType = fuelType;
-        this.size = size;
-        this.color = color;
-        this.category = category;
-        this.nrSeats = nrSeats;
-        this.nrDoors = nrDoors;
-        this.gearBoxType = gearBoxType;
-        this.airCondition = airCondition;
-        this.gps = gps;
-        this.available = available;
-        this.working = working;
-        this.pricePerDay = pricePerDay;
+    public Car() {
     }
 
     /*
@@ -78,11 +65,11 @@ public class Car {
         Gets the size of the engine
         @returns int representing the size of the engine of the current car
         */
-    public float getSize() {
+    public int getSize() {
         return size;
     }
 
-    public void setSize(float size) {
+    public void setSize(int size) {
         this.size = size;
     }
 
@@ -102,17 +89,17 @@ public class Car {
         Gets the category of the car, for ex. hatchback, sport, break, etc.
         @returns String representing the category of the current car
         */
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
     /*
-        Gets the number of the seats in a car
-        @returns int representing the number of the seats in the current car
+        Gets the carNumber of the seats in a car
+        @returns int representing the carNumber of the seats in the current car
         */
     public int getNrSeats() {
         return nrSeats;
@@ -123,8 +110,8 @@ public class Car {
     }
 
     /*
-        Gets the number of the doors for a car
-        @returns int representing the number of the doors for the current car
+        Gets the carNumber of the doors for a car
+        @returns int representing the carNumber of the doors for the current car
         */
     public int getNrDoors() {
         return nrDoors;
@@ -166,7 +153,7 @@ public class Car {
         this.gps = gps;
     }
 
-    public boolean isAvailable() {
+    public boolean isAvailable(     ) {
         return available;
     }
 
@@ -182,16 +169,63 @@ public class Car {
         this.working = working;
     }
 
-    /*
-         Gets the price per day of the current car
-         @returns price per day of the current car
-         */
-    public double getPricePerDay(CarRepositoryImpl carRepository) {
+    public String getCarNumber() {
+        return carNumber;
+    }
+
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber;
+    }
+
+    public Price getPricePerDay() {
         return pricePerDay;
     }
 
-    public void setPricePerDay(double pricePerDay) {
+    public void setPricePerDay(Price pricePerDay) {
         this.pricePerDay = pricePerDay;
+    }
+
+    /*
+
+         equals method
+         */
+/** two objects of Car type are equal if their carNumber is equal (if their make or model is equal it doesn't mean that
+ * they are equal)
+ */
+
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Car car = (Car) o;
+
+        if (make != car.make) return false;
+        if (model != null ? !model.equals(car.model): car.model != null ) return false;
+
+        return carNumber != null ? carNumber.equals(car.carNumber) : car.carNumber ==  null ;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", fuelType=" + fuelType +
+                ", size=" + size +
+                ", color='" + color + '\'' +
+                ", category=" + category +
+                ", nrSeats=" + nrSeats +
+                ", nrDoors=" + nrDoors +
+                ", gearBoxType=" + gearBoxType +
+                ", airCondition=" + airCondition +
+                ", gps=" + gps +
+                ", available=" + available +
+                ", working=" + working +
+                ", carNumber='" + carNumber + '\'' +
+                ", pricePerDay=" + pricePerDay +
+                '}';
     }
 }
 

@@ -1,20 +1,20 @@
 package ro.sci.carrental.repository;
 
-import ro.sci.carrental.domain.Car;
-import ro.sci.carrental.domain.FuelType;
+
+
+import ro.sci.carrental.domain.car.Car;
+import ro.sci.carrental.domain.car.FuelType;
 
 import java.util.List;
 
-public interface CarRepository {
+public interface CarRepository<T extends Car> extends Repository<T>{
 
-    List<Car> getAll();
+    List<T> getAll();
+    List<T> getCarsByMake (String make);
+    List<T> getCarsByFuel (FuelType fuelType);
 
-    List<Car> getCarsByMake (String make);
-
-    List<Car> getCarsByFuel (FuelType fuelType);
-
-    void add(Car car);
-    void delete(Car car);
-    void update (Car car);
+    void add(T t);
+    void delete(T t);
+    void update(T t);
 
 }

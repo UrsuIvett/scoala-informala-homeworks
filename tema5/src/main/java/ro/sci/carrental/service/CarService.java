@@ -1,18 +1,21 @@
 package ro.sci.carrental.service;
 
-import ro.sci.carrental.domain.Car;
+import ro.sci.carrental.domain.car.Car;
 
 import java.util.List;
 
 /**
  * Created by Ivett on 26-May-17.
  */
-public interface CarService {
+public interface CarService<T extends Car> {
 
-    List<Car> findCarsByMake (String make);
+    void add (T t);
+    void delete (T t);
+    void update (T t);
 
-    List<Car> findCarsByMakeAndModel (String make, String model);
+    List<T> findCarsByMake (String make);
 
-    List<Car> findCarsByMultipleCategories (String make,String model, String color);
+    List<T> findCarsByMakeAndModel (String make, String model);
 
+    List<T> findCarsByMultipleCategories (String make, String model, String color);
 }

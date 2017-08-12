@@ -1,0 +1,3 @@
+Romania, Cluj, Cluj, Emil Isac, 15
+Romania, Mures, Targu-Mures, Mihai Eminescu, 3
+Romania, Bucuresti, Bucuresti, Comedy, 10
