@@ -11,8 +11,7 @@ public interface CarRepository<T extends Car> extends Repository<T>{
 
     List<T> getAll();
     List<T> getCarsByMake (String make);
-    List<T> getCarsByFuel (FuelType fuelType);
-
+    List<T> getCarsByMakeAndModel (String make, String model);
     void add(T t);
     void delete(T t);
     void update(T t);

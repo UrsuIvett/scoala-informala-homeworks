@@ -10,50 +10,44 @@ import java.util.List;
  * Created by Ivett on 05-Jun-17.
  */
 
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService<Customer>{
 
     private CustomerRepository<Customer> customerRepository;
 
-    // private List<Customer> customers = new ArrayList<Customer>();
-
-    public CustomerServiceImpl(CustomerRepository<Customer> customerRepository) {
+    @Override
+    public void setCustomerRepository(CustomerRepository<Customer> customerRepository) {
         this.customerRepository = customerRepository;
     }
 
     @Override
-    public void add(Customer customer) {
+    public List<Customer> getAll() {
+       return this.customerRepository.getAll();
+    }
 
+    @Override
+    public void add(Customer customer) {
+    this.customerRepository.add(customer);
     }
 
     @Override
     public void delete(Customer customer) {
-
+    this.customerRepository.delete(customer);
     }
 
     @Override
     public void update(Customer customer) {
-
+    this.customerRepository.update(customer);
     }
 
-    public List<Customer> findCustomerByFirstName(String FirstName) {
-        List<Customer> foundCustomer = new ArrayList<Customer>();
-
-        for (Customer customer: customerRepository.getAll()) {
-            if (customer.getFirstName().equals(FirstName)){
-                foundCustomer.add(customer);
-            }
-        }
-        return foundCustomer;
+    @Override
+    public List<Customer> findCustomerByMobile(String mobile) {
+        return this.customerRepository.getCustomerByMobile(mobile);
     }
 
-    public List<Customer> findCustomerByLastName(String LastName) {
-        List<Customer> foundCustomer = new ArrayList<Customer>();
-
-        for (Customer customer: customerRepository.getAll()){
-            if (customer.getLastName().equals(LastName)){
-                foundCustomer.add(customer);
-            }
-        }
-        return foundCustomer;
+    @Override
+    public List<Customer> findCustomerByLastName(String lastName) {
+        return this.customerRepository.getCustomerByLastName(lastName);
     }
+
+
 }

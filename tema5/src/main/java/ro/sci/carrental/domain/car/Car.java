@@ -7,6 +7,7 @@ import ro.sci.carrental.service.Price;
  */
 public class Car {
 
+    private int id;
     private String make;
     private String model;
     private FuelType fuelType;
@@ -33,6 +34,15 @@ public class Car {
         Gets the make of a car
         @returns String representing the make of a car
         */
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getMake() {return make; }
 
     public void setMake(String make) {

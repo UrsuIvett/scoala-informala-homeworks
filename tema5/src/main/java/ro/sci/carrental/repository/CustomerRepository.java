@@ -13,5 +13,7 @@ public interface CustomerRepository<T extends Customer> extends Repository<T> {
     void add(T t);
     void delete(T t);
     void update(T t);
+    List<T> getCustomerByLastName (String name);
+    List<T> getCustomerByMobile (String mobile);
 
 }

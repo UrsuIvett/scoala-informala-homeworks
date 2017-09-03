@@ -3,16 +3,11 @@ package ro.sci.carrental;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ro.sci.carrental.domain.car.Car;
-import ro.sci.carrental.domain.customer.Address;
 import ro.sci.carrental.domain.customer.Customer;
-import ro.sci.carrental.reader.*;
-import ro.sci.carrental.repository.CarDAO;
-import ro.sci.carrental.repository.CarRepository;
 import ro.sci.carrental.repository.CarRepositoryImpl;
-import ro.sci.carrental.repository.CustomerDAO;
+import ro.sci.carrental.repository.CustomerRepositoryImpl;
 import ro.sci.carrental.service.*;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +16,39 @@ import java.util.List;
  */
 public class Main {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("Car");
+    private static final Logger LOGGER = LoggerFactory.getLogger("Car/Customer ");
 
     public static void main(String[] args) throws InvalidCurrencyException {
         LOGGER.info("START Main");
+
+       CarService<Car> carService = new CarServiceImpl();
+       carService.setCarRepository(new CarRepositoryImpl());
+        /*List<Car> cars = carService.getAll();
+
+        for (Car c: cars) {
+            System.out.println(c.getId()+" "+c.getModel()+" "+c.getMake()+" "+c.getPricePerDay().getPrice()+" "+c.getPricePerDay().getCurrency());
+        }
+
+        CustomerService<Customer> customerService = new CustomerServiceImpl();
+        customerService.setCustomerRepository(new CustomerRepositoryImpl());
+
+        List<Customer> customers = customerService.getAll();
+
+        for (Customer cc: customers) {
+            System.out.println(cc.getId()+" "+cc.getFirstName()+" "+cc.getLastName()+" "+cc.getAddress().getCity()+" "+cc.getAddress().getStreet());
+        }*/
+
+       LOGGER.info("\n cars: \n"+ carService.getAll()+"\n ");
+       LOGGER.info("\n Find cars by make: \n"+ carService.findCarsByMake("Skoda").toString()+"\n ");
+
+        CustomerService<Customer> customerService = new CustomerServiceImpl();
+        customerService.setCustomerRepository(new CustomerRepositoryImpl());
+
+        LOGGER.info("\n customers: \n"+ customerService.getAll()+"\n ");
+        LOGGER.info("\n Find customers by last name: \n"+ customerService.findCustomerByLastName("Griffin").toString()+"\n ");
+
+
+        LOGGER.info("END Main");
 
         /* reads from a text file, and the text is transformed to a Car object
         * */
@@ -93,8 +117,8 @@ public class Main {
             for (Address a : addresses) {
                 ia++;
                 if (ic == ia) {
-                    c.setAdress(a);
-                    System.out.println(c.getFirstName() + " " + c.getLastName() + ", " + "mobile number:" + c.getMobilNumber() + " city: " + c.getAdress().getCity() + ", street: " + c.getAdress().getStreet() + " nr." + c.getAdress().getNumber());
+                    c.setAddress(a);
+                    System.out.println(c.getFirstName() + " " + c.getLastName() + ", " + "mobile number:" + c.getMobilNumber() + " city: " + c.getAddress().getCity() + ", street: " + c.getAddress().getStreet() + " nr." + c.getAddress().getNumber());
                 }
             }
         }
@@ -183,43 +207,8 @@ public class Main {
        } catch (InvalidEntityException e){
            System.out.println("Invalid entity");
        }
+     */
 
-
-        System.out.println(" ");
-        System.out.println("Cars after search by make: ");
-
-
-        CarServiceImpl searchByMake = new CarServiceImpl(carList);
-        List<Car> foundCarsByMake = searchByMake.findCarsByMake("Skoda");
-
-        for (Car car : foundCarsByMake) {
-            System.out.println(car.getMake()+ " " + car.getModel());
-        }
-        System.out.println(" ");
-        System.out.println("Cars after the search by make & model: ");*/
-
-        // CarServiceImpl searchByMakeAndModel = new CarServiceImpl(carDAO);
-        /*List<Car> foundCarsByMakeAndModel = searchByMakeAndModel.findCarsByMakeAndModel("Skoda", "Octavia");
-
-        for (Car car : foundCarsByMakeAndModel) {
-            System.out.println(car.getMake() + " " + car.getModel());
-        }
-
-        System.out.println(" ");
-        System.out.println("Cars  after the search by make & model & color: ");
-
-        CarServiceImpl searchMultiple = new CarServiceImpl(carList);
-        List<Car> foundCarsByMultipleCategories = searchMultiple.findCarsByMultipleCategories("Skoda", "Octavia", "Green");
-
-        for (Car car : foundCarsByMultipleCategories) {
-            System.out.println(car.getMake() + " " + car.getModel() + " " + car.getColor());
-        }*/
-        CarDAO carDAO = new CarDAO();
-        carDAO.printAllCars();
-
-        CustomerDAO customerDAO = new CustomerDAO();
-        customerDAO.printAllCustomer();
-        LOGGER.info("END Main");
     }
 }
 
