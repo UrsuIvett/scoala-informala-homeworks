@@ -19,14 +19,14 @@ import java.util.List;
 public class CustomerRepositoryImpl extends BaseRepository implements CustomerRepository<Customer>{
 
     private static final Logger LOGGER = LoggerFactory.getLogger("CustomerDB");
-    private static final String SELECT_FROM_CUSTOMER_AND_ADDRESS = "SELECT *FROM customer inner join address on customer.id=address.id";
-    private static final String INSERT_INTO_CUSTOMER = "INSERT INTO customer(first_name,last_name,country,county,city,street,street_number,mobile_number)" +
+    private static final String SELECT_FROM_CUSTOMER_AND_ADDRESS = "SELECT *FROM customer, address where customer.id=address.id";
+    private static final String INSERT_INTO_CUSTOMER = "INSERT INTO customer, address (first_name,last_name,country,county,city,street,street_number,mobile_number)" +
             "values(?,?,?,?,?,?,?,?)";
-    private static final String DELETE_FROM_CUSTOMER_WHERE_ID = "DELETE FROM customer WHERE mobile_number=?";
-    private static final String UPDATE_CUSTOMER_WHERE_ID = "UPDATE customer " + "SET first_name=?, last_name=?, country=?, county=?, city=?, street=?, street_number=?, mobile_number=? "
+    private static final String DELETE_FROM_CUSTOMER_WHERE_ID = "DELETE FROM customer, address WHERE mobile_number=?";
+    private static final String UPDATE_CUSTOMER_WHERE_ID = "UPDATE customer, address " + "SET first_name=?, last_name=?, country=?, county=?, city=?, street=?, street_number=?, mobile_number=? "
             + "WHERE id = ?";
-    private static final String SELECT_FROM_CUSTOMER_WHERE_LAST_NAME = "SELECT * from customer WHERE last_name=?";
-    private static final String SELECT_FROM_CUSTOMER_WHERE_MOBILE = "SELECT * from customer WHERE mobile_number=?";
+    private static final String SELECT_FROM_CUSTOMER_WHERE_LAST_NAME = "SELECT * from customer, address WHERE last_name=?";
+    private static final String SELECT_FROM_CUSTOMER_WHERE_MOBILE = "SELECT * from customer, address WHERE mobile_number=?";
 
 
     @Override

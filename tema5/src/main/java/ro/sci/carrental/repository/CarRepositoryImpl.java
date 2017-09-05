@@ -20,14 +20,14 @@ import java.util.List;
 public class CarRepositoryImpl extends BaseRepository implements CarRepository<Car> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("CarDB");
-    private static final String SELECT_FROM_CAR_AND_PRICE = "SELECT *FROM car inner join price on car.id=price.id";
-    private static final String INSERT_INTO_CAR = "INSERT INTO car(make,model,fueltype,size,color,category,nrseats,nrdoors,gearboxtype,aircondition,gps,available,working,carnumber,price,currency)" +
+    private static final String SELECT_FROM_CAR_AND_PRICE = "SELECT * FROM car, price where car.id=price.id";
+    private static final String INSERT_INTO_CAR = "INSERT INTO car, price(make,model,fueltype,size,color,category,nrseats,nrdoors,gearboxtype,aircondition,gps,available,working,carnumber,price,currency)" +
             "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String DELETE_FROM_CAR_WHERE_ID = "DELETE FROM car WHERE make=?";
-    private static final String UPDATE_CAR_WHERE_ID = "UPDATE car " + "SET make=?, model=?, fueltype=?, size=?, color=?, category=?, nrseats=?, nrdoors=?, gearboxtype=?, aircondition=?, gps=?, available=?, working=?, "
+    private static final String DELETE_FROM_CAR_WHERE_ID = "DELETE FROM car, price WHERE make=?";
+    private static final String UPDATE_CAR_WHERE_ID = "UPDATE car, price " + "SET make=?, model=?, fueltype=?, size=?, color=?, category=?, nrseats=?, nrdoors=?, gearboxtype=?, aircondition=?, gps=?, available=?, working=?, "
             + "carnumber=?, price=?, currency=? " + "WHERE id = ?";
-    private static final String SELECT_FROM_CAR_WHERE_MAKE = "SELECT * from car WHERE make=?";
-    private static final String SELECT_FROM_CAR_WHERE_MAKE_MODEL = "SELECT * from car WHERE make=? and model=?";
+    private static final String SELECT_FROM_CAR_WHERE_MAKE = "SELECT * from car, price WHERE car.id=price.id and make=?";
+    private static final String SELECT_FROM_CAR_WHERE_MAKE_MODEL = "SELECT * from car, price WHERE make=? and model=?";
 
     @Override
     public List<Car> getAll() {
@@ -53,7 +53,7 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
             car.setWorking(rs.getBoolean("working"));
             car.setCarNumber(rs.getString("color"));
             car.setCarNumber(rs.getString("carnumber"));
-            Price price = new Price(rs.getDouble("value"),Currency.valueOf(rs.getString("currency")));
+            Price price = new Price(rs.getDouble("val"),Currency.valueOf(rs.getString("currency")));
             car.setPricePerDay(price);
             cars.add(car);
         }
@@ -90,7 +90,7 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
                 car.setCarNumber(rs.getString("color"));
                 car.setCarNumber(rs.getString("carnumber"));
                 int id = rs.getInt("id");
-                double value = rs.getDouble("value");
+                double value = rs.getDouble("val");
                 Currency currency = Currency.valueOf(rs.getString("currency"));
                 Price price = new Price(value, currency);
                 car.setPricePerDay(price);
@@ -130,7 +130,7 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
                 car.setWorking(rs.getBoolean("working"));
                 car.setCarNumber(rs.getString("color"));
                 car.setCarNumber(rs.getString("carnumber"));
-                Price price = new Price(rs.getDouble("value"), Currency.valueOf(rs.getString("currency")));
+                Price price = new Price(rs.getDouble("val"), Currency.valueOf(rs.getString("currency")));
                 car.setPricePerDay(price);
                 carList.add(car);
             }
