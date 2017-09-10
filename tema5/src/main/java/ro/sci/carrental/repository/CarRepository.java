@@ -7,13 +7,16 @@ import ro.sci.carrental.domain.car.FuelType;
 
 import java.util.List;
 
-public interface CarRepository<T extends Car> extends Repository<T>{
+public interface CarRepository {
 
-    List<T> getAll();
-    List<T> getCarsByMake (String make);
-    List<T> getCarsByMakeAndModel (String make, String model);
-    void add(T t);
-    void delete(T t);
-    void update(T t);
+    List<Car> getAll();
+
+    List<Car> getCarsByMake (String make);
+
+    List<Car> getCarsByFuel (FuelType fuelType);
+
+    void add(Car car);
+    void delete(Car car);
+    void update (Car car);
 
 }

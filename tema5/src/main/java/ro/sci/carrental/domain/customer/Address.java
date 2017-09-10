@@ -10,7 +10,6 @@ public class Address {
     private String street;
     private int number;
 
-
     public Address() {
     }
 
@@ -53,6 +52,5 @@ public class Address {
     public void setNumber(int number) {
         this.number = number;
     }
-
 }
 

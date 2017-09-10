@@ -3,11 +3,14 @@ package ro.sci.carrental;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ro.sci.carrental.domain.car.Car;
+import ro.sci.carrental.domain.customer.Address;
 import ro.sci.carrental.domain.customer.Customer;
+import ro.sci.carrental.reader.*;
+import ro.sci.carrental.repository.CarRepository;
 import ro.sci.carrental.repository.CarRepositoryImpl;
-import ro.sci.carrental.repository.CustomerRepositoryImpl;
 import ro.sci.carrental.service.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,29 +19,14 @@ import java.util.List;
  */
 public class Main {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger("Car/Customer ");
+    private static final Logger LOGGER = LoggerFactory.getLogger("Car");
 
     public static void main(String[] args) throws InvalidCurrencyException {
-        LOGGER.trace("START Main");
-
-       CarService<Car> carService = new CarServiceImpl();
-       carService.setCarRepository(new CarRepositoryImpl());
-
-       LOGGER.info("\n cars: \n"+ carService.getAll()+"\n ");
-       LOGGER.info("\n Find cars by make: \n"+ carService.findCarsByMake("Skoda").toString()+"\n ");
-
-        CustomerService<Customer> customerService = new CustomerServiceImpl();
-        customerService.setCustomerRepository(new CustomerRepositoryImpl());
-
-        LOGGER.info("\n customers: \n"+ customerService.getAll()+"\n ");
-        LOGGER.info("\n Find customers by last name: \n"+ customerService.findCustomerByLastName("Griffin").toString()+"\n ");
-
-
-        LOGGER.trace("END Main");
+        LOGGER.info("START Main");
 
         /* reads from a text file, and the text is transformed to a Car object
         * */
-        /* final List<Car> carList = new ArrayList<Car>();
+        final List<Car> carList = new ArrayList<Car>();
         File file = new File("tema5/src/main/java/cars.txt");
         EntityReader entityReader = new EntityReader();
         List<String> lines = entityReader.readLines(file);
@@ -89,7 +77,6 @@ public class Main {
             }
         }
 
-
         System.out.println("Cars: ");
         for (Car car : carList) {
             System.out.println(car);
@@ -103,14 +90,13 @@ public class Main {
             for (Address a : addresses) {
                 ia++;
                 if (ic == ia) {
-                    c.setAddress(a);
-                    System.out.println(c.getFirstName() + " " + c.getLastName() + ", " + "mobile number:" + c.getMobilNumber() + " city: " + c.getAddress().getCity() + ", street: " + c.getAddress().getStreet() + " nr." + c.getAddress().getNumber());
+                    c.setAdress(a);
+                    System.out.println(c.getFirstName() + " " + c.getLastName() + ", " + "mobile number:" + c.getMobilNumber() + " city: " + c.getAdress().getCity() + ", street: " + c.getAdress().getStreet() + " nr." + c.getAdress().getNumber());
                 }
             }
         }
         System.out.println(" ");
-
-        searching();*/
+        searching(carList);
 
         /* Car car1 = new Car();
         car1 = carList.get(3);
@@ -121,8 +107,9 @@ public class Main {
         for (Car car : carList) {
             System.out.println(car.getMake()+ " " + car.getModel());
         }*/
+        System.out.println(" ");
 
-      /*  Car car2 = new Car();
+        Car car2 = new Car();
         car2 = carList.get(1);
         RentingPrice rentingPrice = new RentingPrice();
         int daysNumber = 5;
@@ -170,10 +157,8 @@ public class Main {
         t2.start();
         t3.start();
     }
-        */
 
-
-   /* private static void searching(List<Car> carList) {
+    private static void searching(List<Car> carList) {
 
         System.out.println("Cars from the Repo: ");
 
@@ -184,7 +169,7 @@ public class Main {
         File file = new File("tema5/src/main/java/carsout.txt");
         EntityWriter entityWriter = new EntityWriter();
        try {
-           ArrayList<String> carsInString = new ArrayList<String>();
+           ArrayList<String > carsInString = new ArrayList<>();
            CarToString carToString = new CarToString();
            for (Car currentCar: carList) {
                carsInString.add(carToString.convertToString(currentCar));
@@ -193,10 +178,40 @@ public class Main {
        } catch (InvalidEntityException e){
            System.out.println("Invalid entity");
        }
-     */
+
+
+        System.out.println(" ");
+        System.out.println("Cars after search by make: ");
+
+        CarServiceImpl searchByMake = new CarServiceImpl(carList);
+        List<Car> foundCarsByMake = searchByMake.findCarsByMake("Skoda");
+
+        for (Car car : foundCarsByMake) {
+            System.out.println(car.getMake()+ " " + car.getModel());
+        }
+        System.out.println(" ");
+        System.out.println("Cars after the search by make & model: ");
+
+        CarServiceImpl searchByMakeAndModel = new CarServiceImpl(carList);
+        List<Car> foundCarsByMakeAndModel = searchByMakeAndModel.findCarsByMakeAndModel("Skoda", "Octavia");
+
+        for (Car car : foundCarsByMakeAndModel) {
+            System.out.println(car.getMake() + " " + car.getModel());
+        }
+
+        System.out.println(" ");
+        System.out.println("Cars  after the search by make & model & color: ");
+
+        CarServiceImpl searchMultiple = new CarServiceImpl(carList);
+        List<Car> foundCarsByMultipleCategories = searchMultiple.findCarsByMultipleCategories("Skoda", "Octavia", "Green");
+
+        for (Car car : foundCarsByMultipleCategories) {
+            System.out.println(car.getMake() + " " + car.getModel() + " " + car.getColor());
+        }
 
     }
-}
+
+    }
 
 
 

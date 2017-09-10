@@ -2,6 +2,8 @@ package ro.sci.carrental.reader;
 
 import ro.sci.carrental.domain.car.Car;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ivett on 26-Jul-17.
  */
@@ -21,7 +23,7 @@ public class CarToString {
         current=current+String.valueOf(car.hasGps())+" ";
         current=current+String.valueOf(car.isAvailable())+" ";
         current=current+String.valueOf(car.isWorking())+" ";
-        current=current+car.getCarNumber()+" ";
+        current=current+car.getNumber()+" ";
         current=current+String.valueOf(car.getPricePerDay().getPrice())+" ";
         current=current+String.valueOf(car.getPricePerDay().getCurrency())+" ";
         return current;

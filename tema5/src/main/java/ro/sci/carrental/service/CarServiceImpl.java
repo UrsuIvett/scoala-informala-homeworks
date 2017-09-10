@@ -1,52 +1,59 @@
 package ro.sci.carrental.service;
 
-import ro.sci.carrental.repository.CarRepository;
+import ro.sci.carrental.repository.CarRepositoryImpl;
 import ro.sci.carrental.domain.car.Car;
-import ro.sci.carrental.repository.Repository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * Created by Ivett on 24-May-17.
  */
-public class CarServiceImpl implements CarService<Car> {
+public class CarServiceImpl implements CarService {
 
-    private CarRepository<Car> carRepository;
+    private CarRepositoryImpl carRepository;
+    private List<Car> cars = new ArrayList<Car>();
 
-    @Override
-    public void setCarRepository(CarRepository<Car> carRepository) {
-        this.carRepository = carRepository;
+    public CarServiceImpl(List<Car> cars) {
+        this.cars = cars;
     }
 
-    @Override
-    public List<Car> getAll() {
-       return this.carRepository.getAll();
-    }
-
-    @Override
-    public void add(Car car) {
-    this.carRepository.add(car);
-    }
-
-    @Override
-    public void delete(Car car) {
-    this.carRepository.delete(car);
-    }
-
-    @Override
-    public void update(Car car) {
-    this.carRepository.update(car);
-    }
-
-    @Override
     public List<Car> findCarsByMake(String make) {
-        return this.carRepository.getCarsByMake(make);
+    List<Car> foundCars = new ArrayList<Car>();
+
+         for (Car car : cars ) {
+            if (car.getMake().equals(make)) {
+            foundCars.add(car);
+            }
+         }
+     return foundCars;
     }
 
-    @Override
     public List<Car> findCarsByMakeAndModel(String make, String model) {
-        return this.carRepository.getCarsByMakeAndModel(make,model);
+        List<Car> foundCars = new ArrayList<Car>();
+
+        for (Car car : cars ) {
+            if ((car.getMake().equals(make)) && (car.getModel().equals(model))) {
+                foundCars.add(car);
+            }
+        }
+        return foundCars;
     }
+
+    public List<Car> findCarsByMultipleCategories (String make, String model, String color ) {
+        List<Car> foundCars = new ArrayList<Car>();
+
+        for (Car car : cars ) {
+            if ((car.getMake().equals(make)) && (car.getModel().equals(model)) && (car.getColor().equals(color))) {
+                foundCars.add(car);
+            }
+        }
+        return foundCars;
+    }
+
+
+
+
 
 }

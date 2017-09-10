@@ -1,7 +1,6 @@
 package ro.sci.carrental.service;
 
 import ro.sci.carrental.domain.customer.Customer;
-import ro.sci.carrental.repository.CustomerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,44 +9,33 @@ import java.util.List;
  * Created by Ivett on 05-Jun-17.
  */
 
-public class CustomerServiceImpl implements CustomerService<Customer>{
+public class CustomerServiceImpl implements CustomerService{
 
-    private CustomerRepository<Customer> customerRepository;
+    private List<Customer> customers = new ArrayList<Customer>();
 
-    @Override
-    public void setCustomerRepository(CustomerRepository<Customer> customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerServiceImpl(List<Customer> customers) {
+        this.customers = customers;
     }
 
-    @Override
-    public List<Customer> getAll() {
-       return this.customerRepository.getAll();
+    public List<Customer> findCustomerByFirstName(String FirstName) {
+        List<Customer> foundCustomer = new ArrayList<Customer>();
+
+        for (Customer customer: customers) {
+            if (customer.getFirstName().equals(FirstName)){
+                foundCustomer.add(customer);
+            }
+        }
+        return foundCustomer;
     }
 
-    @Override
-    public void add(Customer customer) {
-    this.customerRepository.add(customer);
+    public List<Customer> findCustomerByLastName(String LastName) {
+        List<Customer> foundCustomer = new ArrayList<Customer>();
+
+        for (Customer customer: customers){
+            if (customer.getLastName().equals(LastName)){
+                foundCustomer.add(customer);
+            }
+        }
+        return foundCustomer;
     }
-
-    @Override
-    public void delete(Customer customer) {
-    this.customerRepository.delete(customer);
-    }
-
-    @Override
-    public void update(Customer customer) {
-    this.customerRepository.update(customer);
-    }
-
-    @Override
-    public List<Customer> findCustomerByMobile(String mobile) {
-        return this.customerRepository.getCustomerByMobile(mobile);
-    }
-
-    @Override
-    public List<Customer> findCustomerByLastName(String lastName) {
-        return this.customerRepository.getCustomerByLastName(lastName);
-    }
-
-
 }

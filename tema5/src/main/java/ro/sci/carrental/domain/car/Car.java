@@ -7,11 +7,10 @@ import ro.sci.carrental.service.Price;
  */
 public class Car {
 
-    private int id;
     private String make;
     private String model;
     private FuelType fuelType;
-    private int size;
+    private float size;
     private String color;
     private Category category;
     private int nrSeats;
@@ -21,7 +20,7 @@ public class Car {
     private boolean gps;
     private boolean available;
     private boolean working;
-    private String carNumber;
+    private String  number;
     private Price pricePerDay;
 /*
  Car constructor
@@ -34,15 +33,6 @@ public class Car {
         Gets the make of a car
         @returns String representing the make of a car
         */
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getMake() {return make; }
 
     public void setMake(String make) {
@@ -75,11 +65,11 @@ public class Car {
         Gets the size of the engine
         @returns int representing the size of the engine of the current car
         */
-    public int getSize() {
+    public float getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(float size) {
         this.size = size;
     }
 
@@ -108,8 +98,8 @@ public class Car {
     }
 
     /*
-        Gets the carNumber of the seats in a car
-        @returns int representing the carNumber of the seats in the current car
+        Gets the number of the seats in a car
+        @returns int representing the number of the seats in the current car
         */
     public int getNrSeats() {
         return nrSeats;
@@ -120,8 +110,8 @@ public class Car {
     }
 
     /*
-        Gets the carNumber of the doors for a car
-        @returns int representing the carNumber of the doors for the current car
+        Gets the number of the doors for a car
+        @returns int representing the number of the doors for the current car
         */
     public int getNrDoors() {
         return nrDoors;
@@ -163,7 +153,7 @@ public class Car {
         this.gps = gps;
     }
 
-    public boolean isAvailable(     ) {
+    public boolean isAvailable() {
         return available;
     }
 
@@ -179,12 +169,12 @@ public class Car {
         this.working = working;
     }
 
-    public String getCarNumber() {
-        return carNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setCarNumber(String carNumber) {
-        this.carNumber = carNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public Price getPricePerDay() {
@@ -199,7 +189,7 @@ public class Car {
 
          equals method
          */
-/** two objects of Car type are equal if their carNumber is equal (if their make or model is equal it doesn't mean that
+/** two objects of Car type are equal if their number is equal (if their make or model is equal it doesn't mean that
  * they are equal)
  */
 
@@ -214,7 +204,7 @@ public class Car {
         if (make != car.make) return false;
         if (model != null ? !model.equals(car.model): car.model != null ) return false;
 
-        return carNumber != null ? carNumber.equals(car.carNumber) : car.carNumber ==  null ;
+        return number != null ? number.equals(car.number) : car.number ==  null ;
     }
 
     @Override
@@ -233,7 +223,7 @@ public class Car {
                 ", gps=" + gps +
                 ", available=" + available +
                 ", working=" + working +
-                ", carNumber='" + carNumber + '\'' +
+                ", number='" + number + '\'' +
                 ", pricePerDay=" + pricePerDay +
                 '}';
     }
