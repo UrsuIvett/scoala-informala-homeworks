@@ -7,7 +7,7 @@ import ro.sci.carrental.service.Price;
 import ro.sci.carrental.service.RentingPrice;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static ro.sci.carrental.service.Currency.EURO;
+import static ro.sci.carrental.service.Currency.EUR;
 
 /**
  * Created by Ivett on 01-Jul-17.
@@ -21,14 +21,14 @@ public class TestingRentingPrice {
            //given
            RentingPrice r1 = new RentingPrice();
            Car c1 = new Car();
-           Price pricePerDay1 = new Price(2.5, EURO);
+           Price pricePerDay1 = new Price(2.5, EUR);
            c1.setPricePerDay(pricePerDay1);
            int days = 0;
            //then
            Price result = r1.calculateRentingPrince(c1, days);
 
            //evaluate
-           Price expected = new Price(0, EURO);
+           Price expected = new Price(0, EUR);
            assertEquals(expected, result);
     }
 
@@ -38,7 +38,7 @@ public class TestingRentingPrice {
         //given
         RentingPrice r1 = new RentingPrice();
         Car c1 = new Car();
-        Price pricePerDay1 = new Price(2.5, EURO);
+        Price pricePerDay1 = new Price(2.5, EUR);
         c1.setPricePerDay(pricePerDay1);
         int days = -2;
 
@@ -46,7 +46,7 @@ public class TestingRentingPrice {
         Price result = r1.calculateRentingPrince(c1, days);
 
         //evaluate
-        Price expected = new Price(5, EURO);
+        Price expected = new Price(5, EUR);
         assertEquals(expected, result);
 
 
