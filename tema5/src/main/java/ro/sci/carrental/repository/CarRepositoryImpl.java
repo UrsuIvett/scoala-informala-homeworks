@@ -30,7 +30,7 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
     private static final String SELECT_FROM_CAR_WHERE_MAKE_MODEL = "SELECT * from car, price WHERE make=? and model=?";
 
     @Override
-    public List<Car> getAll() {
+    public List<Car> getAll()  {
         List<Car> cars = new ArrayList<>();
         try (Connection conn = newConnection();
              Statement stm = conn.createStatement();
@@ -58,8 +58,8 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
             cars.add(car);
         }
     } catch (SQLException ex) {
-                 LOGGER.warn("DATABASE ERROR");
-        ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
     }
         return cars;
     }
@@ -97,8 +97,8 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
                 carList.add(car);
             }
         } catch (SQLException ex) {
-            LOGGER.warn("DATABASE ERROR");
-            ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
         }
 
         return carList;
@@ -135,8 +135,8 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
                 carList.add(car);
             }
         } catch (SQLException ex) {
-            LOGGER.warn("DATABASE ERROR");
-            ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
         }
         return carList;
     }
@@ -164,11 +164,11 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
         stm.setDouble(15,car.getPricePerDay().getPrice());
         stm.setString(16,String.valueOf(car.getPricePerDay().getCurrency()));
         stm.execute();
-        LOGGER.info("New car was added in the table");
+        LOGGER.trace("New car was added in the table");
 
     } catch (SQLException ex) {
-        LOGGER.warn("DATABASE ERROR");
-        ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
     }
     }
 
@@ -178,11 +178,11 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
              PreparedStatement stm = conn.prepareStatement(DELETE_FROM_CAR_WHERE_ID);) {
             stm.setInt(1, car.getId());
             stm.executeUpdate();
-            LOGGER.info("This car was deleted from the table: ", car.getMake()+" "+car.getModel());
+            LOGGER.trace("This car was deleted from the table: ", car.getMake()+" "+car.getModel());
 
         } catch (SQLException ex) {
-            LOGGER.warn("DATABASE ERROR");
-            ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
         }
     }
 
@@ -209,11 +209,11 @@ public class CarRepositoryImpl extends BaseRepository implements CarRepository<C
         stm.setString(16,String.valueOf(car.getPricePerDay().getCurrency()));
         stm.setInt(17, car.getId());
         stm.executeUpdate();
-        LOGGER.info("A car was updated");
+        LOGGER.trace("A car was updated");
 
     } catch (SQLException ex) {
-        LOGGER.warn("DATABASE ERROR");
-        ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
     }
     }
 

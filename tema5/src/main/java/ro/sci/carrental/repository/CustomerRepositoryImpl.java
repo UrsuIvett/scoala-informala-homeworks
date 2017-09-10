@@ -51,8 +51,8 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
                 customers.add(customer);
             }
         } catch (SQLException ex) {
-            LOGGER.warn("DATABASE ERROR");
-            ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
         }
         return customers;
     }
@@ -71,11 +71,11 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
             stm.setInt(7, customer.getAddress().getNumber());
             stm.setString(8, customer.getMobilNumber());
             stm.execute();
-            LOGGER.info("New customer was added in the table");
+            LOGGER.trace("New customer was added in the table");
 
         } catch (SQLException ex) {
-            LOGGER.warn("DATABASE ERROR");
-            ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
         }
     }
 
@@ -85,11 +85,11 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
              PreparedStatement stm = conn.prepareStatement(DELETE_FROM_CUSTOMER_WHERE_ID)) {
             stm.setInt(1, customer.getId());
             stm.executeUpdate();
-            LOGGER.info("This customer was deleted from the table: ", customer.getLastName()+" "+customer.getFirstName());
+            LOGGER.trace("This customer was deleted from the table: ", customer.getLastName()+" "+customer.getFirstName());
 
         } catch (SQLException ex) {
-            LOGGER.warn("DATABASE ERROR");
-            ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
         }
     }
 
@@ -108,11 +108,11 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
             stm.setString(8,customer.getMobilNumber());
             stm.setInt(9, customer.getId());
             stm.executeUpdate();
-            LOGGER.info("A customer was updated");
+            LOGGER.trace("A customer was updated");
 
         } catch (SQLException ex) {
-            LOGGER.warn("DATABASE ERROR");
-            ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
         }
     }
 
@@ -140,8 +140,8 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
                 customerList.add(customer);
             }
         } catch (SQLException ex) {
-            LOGGER.warn("DATABASE ERROR");
-            ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
         }
         return customerList;
     }
@@ -169,11 +169,10 @@ public class CustomerRepositoryImpl extends BaseRepository implements CustomerRe
                 customerList.add(customer);
             }
         } catch (SQLException ex) {
-            LOGGER.warn("DATABASE ERROR");
-            ex.printStackTrace();
+            LOGGER.error("Error! Exceptions happen: ", ex);
+            throw new RuntimeException("Exception at runtime!");
         }
         return customerList;
     }
-
 }
 

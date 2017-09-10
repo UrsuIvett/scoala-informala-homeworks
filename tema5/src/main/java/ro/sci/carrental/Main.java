@@ -19,24 +19,10 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger("Car/Customer ");
 
     public static void main(String[] args) throws InvalidCurrencyException {
-        LOGGER.info("START Main");
+        LOGGER.trace("START Main");
 
        CarService<Car> carService = new CarServiceImpl();
        carService.setCarRepository(new CarRepositoryImpl());
-        /*List<Car> cars = carService.getAll();
-
-        for (Car c: cars) {
-            System.out.println(c.getId()+" "+c.getModel()+" "+c.getMake()+" "+c.getPricePerDay().getPrice()+" "+c.getPricePerDay().getCurrency());
-        }
-
-        CustomerService<Customer> customerService = new CustomerServiceImpl();
-        customerService.setCustomerRepository(new CustomerRepositoryImpl());
-
-        List<Customer> customers = customerService.getAll();
-
-        for (Customer cc: customers) {
-            System.out.println(cc.getId()+" "+cc.getFirstName()+" "+cc.getLastName()+" "+cc.getAddress().getCity()+" "+cc.getAddress().getStreet());
-        }*/
 
        LOGGER.info("\n cars: \n"+ carService.getAll()+"\n ");
        LOGGER.info("\n Find cars by make: \n"+ carService.findCarsByMake("Skoda").toString()+"\n ");
@@ -48,7 +34,7 @@ public class Main {
         LOGGER.info("\n Find customers by last name: \n"+ customerService.findCustomerByLastName("Griffin").toString()+"\n ");
 
 
-        LOGGER.info("END Main");
+        LOGGER.trace("END Main");
 
         /* reads from a text file, and the text is transformed to a Car object
         * */
